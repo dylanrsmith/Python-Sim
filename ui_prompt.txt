@@ -1,0 +1,8 @@
+tkinter ui.
+First row has two boxes with a respective label. First box handles web port and second box handles Ip address
+
+Second row is similar, irst box handles a recipe input, and second handles fill port number. Also with respective labels
+
+Third row has two centered buttons, one is a RUN button, and the other is a CLEAR button
+
+At the bottom are to larger textboxes, where the first will show live values, and the second will show debugging comments.
