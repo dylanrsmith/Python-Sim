@@ -12,6 +12,7 @@ from time import sleep
 # for edgebox, slave index needs to be 1 when calling write_register or read_holding_registers
 
 client = ModbusClient(host='192.168.1.155', port=502)
+# client = ModbusClient(host='192.168.0.117',port=80)     # Benson Fluid Fill box
 
 def write_register(reg, val):    
     data = [val]
@@ -33,12 +34,12 @@ def write_register(reg, val):
 def read_register(reg):
     # rd = client.read_holding_registers(reg,0).registers    
     try:
-        rd = client.read_holding_registers(reg,1,1)    
+        rd = client.read_holding_registers(reg,1,1)   
         print(f'Reading value:{rd} from register:{reg}')
     except Exception as e:
         print("Error: ")
         print(e)
-    return rd
+    return 
 
 if __name__ == '__main__':
     # Device index needs to be 1 for edgebox.
@@ -49,33 +50,33 @@ if __name__ == '__main__':
     print(client.connected)
     sleep(1)
     
-    # read registers
+    ## read registers, getting errors here except for reg 154, investigate
     read_register(100) # read system state
     sleep(0.5)
     read_register(102) # read current recipe
     sleep(0.5)
     read_register(122) # read system status
-    sleep(0.5)    
-    read_register(154) # read current job volume
+    sleep(0.5)
+    read_register(152) # read current job volume
     sleep(0.5)
     read_register(170) # read last job volume
     sleep(0.5)
     read_register(186) # read current flow rate
     sleep(0.5)
     
-    # write registers
-    write_register(400,1) # write recipe
-    sleep(0.5)
-    write_register(402,2) # system state
-    sleep(0.5)
-    write_register(422,3) # system status
-    sleep(0.5)
-    write_register(454,4) # current job volume
-    sleep(0.5)
-    write_register(470,5) # last job volume (?)
-    sleep(0.5)
-    write_register(486,6) # current flow rate
-    sleep(0.5)
+    ## write registers
+    # write_register(400,1) # write recipe
+    # sleep(0.5)
+    # write_register(402,2) # system state
+    # sleep(0.5)
+    # write_register(422,3) # system status
+    # sleep(0.5)
+    # write_register(454,4) # current job volume
+    # sleep(0.5)
+    # write_register(470,5) # last job volume (?)
+    # sleep(0.5)
+    # write_register(486,6) # current flow rate
+    # sleep(0.5)
         
     sleep(1)
     client.close()
